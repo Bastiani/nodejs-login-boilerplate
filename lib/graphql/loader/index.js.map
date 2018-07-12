@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../src/graphql/loader/index.js"],"names":["UserLoader"],"mappings":";;;;;;;AAAA;;IAAYA,U;;;;QAEHA,U,GAAAA,U","file":"index.js","sourcesContent":["import * as UserLoader from '../../modules/user/UserLoader';\n\nexport { UserLoader };\n"]}
