@@ -57,7 +57,6 @@ export const load = async (context: GraphQLContext, id: string): Promise<?User> 
 export const clearCache = ({ dataloaders }: GraphQLContext, id: string) => dataloaders.UserLoader.clear(id.toString());
 
 export const loadUsers = async (context: GraphQLContext, args: ConnectionArguments & Args) => {
-  const { user } = context;
   const { search } = args;
   const conditions = {
     ...(search != null ? { name: { $regex: new RegExp(`^${args.search}`, 'ig') } } : {}),

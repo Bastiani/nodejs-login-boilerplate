@@ -31,14 +31,13 @@ export const getUser = async (dataloaders: Dataloaders, token: string) => {
 };
 
 // $FlowFixMe
-export const getDataloaders = (loaders: Loaders): GraphQLDataloaders =>
-  Object.keys(loaders).reduce(
-    (prev, loaderKey: string) => ({
-      ...prev,
-      [loaderKey]: loaders[loaderKey].getLoader ? loaders[loaderKey].getLoader() : undefined,
-    }),
-    {},
-  );
+export const getDataloaders = (loaders: Loaders): GraphQLDataloaders => Object.keys(loaders).reduce(
+  (prev, loaderKey: string) => ({
+    ...prev,
+    [loaderKey]: loaders[loaderKey].getLoader ? loaders[loaderKey].getLoader() : undefined,
+  }),
+  {},
+);
 
 type UserType = {
   _id: string,

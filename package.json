@@ -12,7 +12,7 @@
     "nodemon": "nodemon --exec npm run babel-node -- src/index.js",
     "build": "npm run clean && mkdir -p lib && ./node_modules/.bin/babel src -s -D -d lib",
     "lint": "./node_modules/.bin/eslint src/*.js",
-    "prepush": "npm run lint",
+    "prepush": "yarn run lint",
     "prepublish": "yarn run build"
   },
   "keywords": [

@@ -1,6 +1,14 @@
 {
   "plugins": ["jest", "flowtype"],
   "extends": ["airbnb-base", "plugin:jest/recommended"],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "modules": true
+    }
+  },
   "rules": {
     "no-mixed-operators": 0,
     "global-require": 0,
@@ -38,5 +46,14 @@
     "object-curly-newline": 0,
     "import/no-cycle": 1,
     "import/no-self-import": 1
+  },
+  "globals": {
+    "require": true
+  },
+  "env": {
+    "jest": true,
+    "node": true,
+    "es6": true,
+    "browser": true
   }
 }
