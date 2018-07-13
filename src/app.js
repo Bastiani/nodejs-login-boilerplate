@@ -17,7 +17,7 @@ const router = new Router();
 
 const graphqlSettingsPerReq = async req => {
   const dataloaders = await getDataloaders(loaders);
-  const { user } = await getUser(req.header.authorization, dataloaders);
+  const { user } = await getUser(dataloaders, req.header.authorization);
 
   return {
     graphiql: process.env.NODE_ENV !== 'production',

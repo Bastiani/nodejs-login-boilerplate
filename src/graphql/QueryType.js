@@ -15,7 +15,7 @@ export default new GraphQLObjectType({
     me: {
       type: UserType,
       description: 'Me is the logged user',
-      resolve: (root, args, context) => UserLoader.load(context, context.user && context.user.id),
+      resolve: async (root, args, context) => UserLoader.load(context, context.user && context.user.id),
     },
     users: {
       type: GraphQLNonNull(UserConnection.connectionType),

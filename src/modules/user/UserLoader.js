@@ -57,6 +57,7 @@ export const load = async (context: GraphQLContext, id: string): Promise<?User> 
 export const clearCache = ({ dataloaders }: GraphQLContext, id: string) => dataloaders.UserLoader.clear(id.toString());
 
 export const loadUsers = async (context: GraphQLContext, args: ConnectionArguments & Args) => {
+  const { user } = context;
   const { search } = args;
   const conditions = {
     ...(search != null ? { name: { $regex: new RegExp(`^${args.search}`, 'ig') } } : {}),
@@ -64,5 +65,10 @@ export const loadUsers = async (context: GraphQLContext, args: ConnectionArgumen
 
   const users = UserModel.find(conditions).sort({ createdAt: -1 });
 
-  return connectionFromMongoCursor({ cursor: users, context, args, loader: load });
+  return connectionFromMongoCursor({
+    cursor: users,
+    context,
+    args,
+    loader: load,
+  });
 };

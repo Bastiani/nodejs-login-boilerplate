@@ -11,7 +11,7 @@ import type { Dataloaders } from './flow/Dataloaders';
  * @param token - jwt token with userId
  * @returns {*}
  */
-export const getUser = async (token: string, dataloaders: Dataloaders) => {
+export const getUser = async (dataloaders: Dataloaders, token: string) => {
   if (!token) {
     return { user: null };
   }
@@ -24,20 +24,21 @@ export const getUser = async (token: string, dataloaders: Dataloaders) => {
       return { user: null };
     }
 
-    return user;
+    return { user };
   } catch (err) {
     return { user: null };
   }
 };
 
 // $FlowFixMe
-export const getDataloaders = (loaders: Loaders): GraphQLDataloaders => Object.keys(loaders).reduce(
-  (prev, loaderKey: string) => ({
-    ...prev,
-    [loaderKey]: loaders[loaderKey].getLoader ? loaders[loaderKey].getLoader() : undefined,
-  }),
-  {},
-);
+export const getDataloaders = (loaders: Loaders): GraphQLDataloaders =>
+  Object.keys(loaders).reduce(
+    (prev, loaderKey: string) => ({
+      ...prev,
+      [loaderKey]: loaders[loaderKey].getLoader ? loaders[loaderKey].getLoader() : undefined,
+    }),
+    {},
+  );
 
 type UserType = {
   _id: string,
