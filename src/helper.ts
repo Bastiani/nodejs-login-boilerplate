@@ -1,17 +1,15 @@
-// @flow
 import jwt from 'jsonwebtoken';
 
 import { jwtSecret } from './config';
 
 import * as UserLoader from './modules/user/UserLoader';
-import type { Dataloaders } from './flow/Dataloaders';
 
 /**
  * Return user and seller given a JWT token
  * @param token - jwt token with userId
  * @returns {*}
  */
-export const getUser = async (dataloaders: Dataloaders, token: string) => {
+export const getUser = async (dataloaders, token: string) => {
   if (!token) {
     return { user: null };
   }
@@ -30,7 +28,6 @@ export const getUser = async (dataloaders: Dataloaders, token: string) => {
   }
 };
 
-// $FlowFixMe
 export const getDataloaders = (loaders: Loaders): GraphQLDataloaders => Object.keys(loaders).reduce(
   (prev, loaderKey: string) => ({
     ...prev,

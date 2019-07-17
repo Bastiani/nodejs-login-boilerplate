@@ -1,4 +1,3 @@
-// @flow
 export type UserFlowType = {
   id: string,
   _id: string,

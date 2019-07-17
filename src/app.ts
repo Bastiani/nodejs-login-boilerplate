@@ -1,12 +1,12 @@
-// @flow
 /* eslint-disable no-console */
-import Koa from 'koa';
+import Koa, { Request } from 'koa';
 import Router from 'koa-router';
-import graphqlHttp from 'koa-graphql';
+import graphqlHttp, { OptionsData } from 'koa-graphql';
 import cors from 'koa-cors';
 import convert from 'koa-convert';
 import { print } from 'graphql/language';
 import { koaPlayground } from 'graphql-playground-middleware';
+import { GraphQLError } from 'graphql';
 
 import schema from './schema';
 import * as loaders from './graphql/loader';
@@ -15,7 +15,7 @@ import { getUser, getDataloaders } from './helper';
 const app = new Koa();
 const router = new Router();
 
-const graphqlSettingsPerReq = async req => {
+const graphqlSettingsPerReq = async (req: Request): Promise<OptionsData> => {
   const dataloaders = await getDataloaders(loaders);
   const { user } = await getUser(dataloaders, req.header.authorization);
 
@@ -28,12 +28,14 @@ const graphqlSettingsPerReq = async req => {
       req,
       dataloaders,
     },
-    extensions: ({ document, variables, operationName, result }) => {
+    extensions: ({
+      document, variables, operationName, result,
+    }): void => {
       console.log(print(document));
       console.log(variables);
       console.log(operationName, result);
     },
-    formatError: error => {
+    formatError: (error: GraphQLError): any => {
       console.log(error.message);
       console.log(error.locations);
       console.log(error.stack);

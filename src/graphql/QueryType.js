@@ -1,4 +1,3 @@
-// @flow
 import { GraphQLObjectType, GraphQLNonNull, GraphQLString } from 'graphql';
 import { connectionArgs } from 'graphql-relay';
 

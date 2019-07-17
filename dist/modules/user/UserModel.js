@@ -1,8 +1,17 @@
-// @flow
-import mongoose from 'mongoose';
-import bcrypt from 'bcryptjs';
+"use strict"; function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }Object.defineProperty(exports, "__esModule", {value: true});var _mongoose = require('mongoose');
+var _bcryptjs = require('bcryptjs'); var _bcryptjs2 = _interopRequireDefault(_bcryptjs);
 
-const Schema = new mongoose.Schema(
+
+
+
+
+
+
+
+
+
+
+const UserSchema = new (0, _mongoose.Schema)(
   {
     name: {
       type: String,
@@ -40,11 +49,10 @@ const Schema = new mongoose.Schema(
   },
 );
 
-Schema.index({ name: 'text' });
-Schema.index({ email: 1 }, { unique: true });
+UserSchema.index({ name: 'text' });
+UserSchema.index({ email: 1 }, { unique: true });
 
-Schema.pre('save', function hashPassword(next) {
-  // eslint-disable-line func-names
+UserSchema.pre('save', function hashPassword(next) {
   // Hash the password
   if (this.isModified('password')) {
     this.encryptPassword(this.password)
@@ -58,17 +66,17 @@ Schema.pre('save', function hashPassword(next) {
   }
 });
 
-Schema.methods = {
+UserSchema.methods = {
   async authenticate(plainText) {
     try {
-      return await bcrypt.compare(plainText, this.password);
+      return await _bcryptjs2.default.compare(plainText, this.password);
     } catch (err) {
       return false;
     }
   },
-  encryptPassword(password) {
-    return bcrypt.hash(password, 8);
+  async encryptPassword(password) {
+    return _bcryptjs2.default.hash(password, 8);
   },
 };
 
-export default mongoose.model('User', Schema);
+exports. default = _mongoose.model('User', UserSchema);

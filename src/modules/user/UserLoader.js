@@ -1,4 +1,3 @@
-// @flow
 import DataLoader from 'dataloader';
 
 import type { ConnectionArguments } from 'graphql-relay';

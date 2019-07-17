@@ -1,4 +1,3 @@
-// @flow
 import type Dataloader from 'dataloader';
 import type { ObjectId } from 'mongoose';
 

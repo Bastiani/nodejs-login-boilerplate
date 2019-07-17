@@ -1,4 +1,3 @@
-// @flow
 import { fromGlobalId, nodeDefinitions } from 'graphql-relay';
 import type { GraphQLObjectType } from 'graphql';
 
