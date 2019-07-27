@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
-import mongoose from 'mongoose';
+import mongoose, { Mongoose } from 'mongoose';
 
-export default function connectDatabase() {
-  return new Promise((resolve, reject) => {
+export default function connectDatabase(): Promise<Mongoose> {
+  return new Promise((resolve, reject): void => {
     mongoose.Promise = global.Promise;
     mongoose.connection
       .on('error', error => reject(error))

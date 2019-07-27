@@ -8,7 +8,8 @@
     "test": "jest --coverage",
     "test:watch": "jest --watch",
     "dev": "nodemon src/index.ts",
-    "build": "sucrase ./src -d ./dist --transforms typescript,imports"
+    "build": "sucrase ./src -d ./dist --transforms typescript,imports",
+    "prod": "tsc --skipLibCheck"
   },
   "keywords": [
     "koa",
@@ -41,6 +42,7 @@
     "@types/koa-cors": "^0.0.0",
     "@types/koa-graphql": "^0.8.0",
     "@types/koa-router": "^7.0.42",
+    "@types/mongoose": "^5.5.8",
     "@typescript-eslint/eslint-plugin": "^1.12.0",
     "@typescript-eslint/parser": "^1.12.0",
     "eslint": "^5.16.0",

@@ -1,26 +1,26 @@
-import { GraphQLBoolean, GraphQLNonNull, GraphQLString } from 'graphql';
-import { mutationWithClientMutationId } from 'graphql-relay';
+import { GraphQLBoolean, GraphQLNonNull, GraphQLString } from "graphql";
+import { mutationWithClientMutationId } from "graphql-relay";
 
-import User from '../../../modules/user/UserModel';
+import User from "../../../modules/User/UserModel";
 
-import * as UserLoader from '../../../modules/user/UserLoader';
-import UserType from '../../../modules/user/UserType';
+import * as UserLoader from "../../../modules/User/UserLoader";
+import UserType from "../../../modules/User/UserType";
 
 const mutation = mutationWithClientMutationId({
-  name: 'UserAdd',
+  name: "UserAdd",
   inputFields: {
     name: {
-      type: GraphQLNonNull(GraphQLString),
+      type: GraphQLNonNull(GraphQLString)
     },
     password: {
-      type: GraphQLString,
+      type: GraphQLString
     },
     email: {
-      type: GraphQLNonNull(GraphQLString),
+      type: GraphQLNonNull(GraphQLString)
     },
     active: {
-      type: GraphQLBoolean,
-    },
+      type: GraphQLBoolean
+    }
   },
   mutateAndGetPayload: async args => {
     const { name, password, email, active } = args;
@@ -29,12 +29,12 @@ const mutation = mutationWithClientMutationId({
       name,
       password,
       email,
-      active,
+      active
     }).save();
 
     return {
       id: newUser._id,
-      error: null,
+      error: null
     };
   },
   outputFields: {
@@ -48,13 +48,13 @@ const mutation = mutationWithClientMutationId({
         }
 
         return newUser;
-      },
+      }
     },
     error: {
       type: GraphQLString,
-      resolve: ({ error }) => error,
-    },
-  },
+      resolve: ({ error }) => error
+    }
+  }
 });
 
 export default mutation;

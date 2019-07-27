@@ -1,10 +1,10 @@
 import { GraphQLObjectType, GraphQLNonNull, GraphQLString } from 'graphql';
 import { connectionArgs } from 'graphql-relay';
 
-import UserType, { UserConnection } from '../modules/user/UserType';
+import UserType, { UserConnection } from '../modules/User/UserType';
 import { nodeField } from '../interface/Node';
 
-import * as UserLoader from '../modules/user/UserLoader';
+import * as UserLoader from '../modules/User/UserLoader';
 
 export default new GraphQLObjectType({
   name: 'Query',

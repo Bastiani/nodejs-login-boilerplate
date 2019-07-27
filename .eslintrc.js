@@ -21,5 +21,12 @@ module.exports = {
   rules: {
     "@typescript-eslint/prefer-interface": 0,
     "@typescript-eslint/consistent-type-definitions": ["error", "type"]
+  },
+  settings: {
+    "import/resolver": {
+      node: {
+        extensions: [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
   }
 };

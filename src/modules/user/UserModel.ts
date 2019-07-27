@@ -11,7 +11,7 @@ type UserInterface = {
   encryptPassword(password: string): Promise<string>
 } & Document
 
-const UserSchema = new Schema(
+const UserSchema = new Schema<UserInterface>(
   {
     name: {
       type: String,
@@ -52,20 +52,20 @@ const UserSchema = new Schema(
 UserSchema.index({ name: 'text' });
 UserSchema.index({ email: 1 }, { unique: true });
 
-UserSchema.pre('save', function hashPassword(next): Promise<any> | void {
+UserSchema.pre('save', function hashPassword(next: any): Promise<string> | void {
   // Hash the password
   if (this.isModified('password')) {
-    this.encryptPassword(this.password)
-      .then((hash: string) => {
+    return this.encryptPassword(this.password)
+      .then((hash: string): void => {
         this.password = hash;
         next();
       })
-      .catch(err => next(err));
-  } else {
-    return next();
+      .catch((err: string): void => next(err));
   }
+  return next();
 });
 
+// @ts-ignore
 UserSchema.methods = {
   async authenticate(plainText: string): Promise<string | boolean> {
     try {

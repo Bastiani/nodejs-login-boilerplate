@@ -7,8 +7,9 @@ import convert from 'koa-convert';
 import { print } from 'graphql/language';
 import { koaPlayground } from 'graphql-playground-middleware';
 import { GraphQLError } from 'graphql';
-
+// @ts-ignore
 import schema from './schema';
+// @ts-ignore
 import * as loaders from './graphql/loader';
 import { getUser, getDataloaders } from './helper';
 

@@ -1,15 +1,32 @@
+/* eslint-disable no-underscore-dangle */
 import jwt from 'jsonwebtoken';
 
 import { jwtSecret } from './config';
-
-import * as UserLoader from './modules/user/UserLoader';
+// @ts-ignore
+import * as UserLoader from './modules/User/UserLoader';
 
 /**
  * Return user and seller given a JWT token
  * @param token - jwt token with userId
  * @returns {*}
  */
-export const getUser = async (dataloaders, token: string) => {
+
+type UserType = {
+  user: {
+    id: string,
+    _id: string
+    name: string,
+    email: string,
+    active: boolean,
+    isAdmin: boolean
+  }
+}
+
+type UserTypeToken = {
+  _id: string,
+};
+
+export const getUser = async (dataloaders: any, token: string): Promise<UserType | { user: null }> => {
   if (!token) {
     return { user: null };
   }
@@ -28,7 +45,7 @@ export const getUser = async (dataloaders, token: string) => {
   }
 };
 
-export const getDataloaders = (loaders: Loaders): GraphQLDataloaders => Object.keys(loaders).reduce(
+export const getDataloaders = (loaders: any): any => Object.keys(loaders).reduce(
   (prev, loaderKey: string) => ({
     ...prev,
     [loaderKey]: loaders[loaderKey].getLoader ? loaders[loaderKey].getLoader() : undefined,
@@ -36,10 +53,6 @@ export const getDataloaders = (loaders: Loaders): GraphQLDataloaders => Object.k
   {},
 );
 
-type UserType = {
-  _id: string,
-};
-
-export function generateToken(user: UserType) {
+export function generateToken(user: UserTypeToken): string {
   return `JWT ${jwt.sign({ id: user._id }, jwtSecret)}`;
 }
