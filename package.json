@@ -72,7 +72,7 @@
     "koa-cors": "^0.0.16",
     "koa-graphql": "^0.7.5",
     "koa-router": "^7.3.0",
-    "mongoose": "^5.1.5",
+    "mongoose": "^5.7.5",
     "nodemon": "^1.17.5"
   }
 }
